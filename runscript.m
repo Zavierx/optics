@@ -3,6 +3,7 @@ A = data(:,3);
 N = data(:,4);
 A = A(2:end);
 N = N(2:end);
+PRECES = 100000;
 num = 51;
 cnum = numel(A);
 X = zeros(cnum);
@@ -17,10 +18,10 @@ Y(:,end) = X(:,end);
 %计算每个圈的面积
 area = zeros(cnum,1);
 carea = zeros(cnum,1);
-xi = zeros(10000,cnum);
-yi = zeros(10000,cnum);
+xi = zeros(PRECES,cnum);
+yi = zeros(PRECES,cnum);
 for i = 1:cnum;
-   xii = linspace(0,X(i,end),10000);
+   xii = linspace(0,X(i,end),PRECES);
    a = A(i);
    n = N(i);
    %确定x,a,n后求y
@@ -32,6 +33,11 @@ for i = 1:cnum;
    %计算多边形面积
    area(i) = polyarea([0,xii,0],[0,yii,0]);
 end
-% 每个欢的面积
+% 每个环的面积
 carea(1) = area(1);
 carea(2:end) = area(2:end)-area(1:end-1);
+% 每个环上每块的面积
+cbarea = carea./num;
+for barea = cbarea
+    
+end
